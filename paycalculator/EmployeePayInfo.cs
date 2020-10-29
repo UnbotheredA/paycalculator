@@ -6,20 +6,27 @@ namespace paycalculator
 {
     class EmployeePayInfo
     {
-        double annualsalary;  
-        double annualbonus;
+        float annualSalary;  
+        float annualBonus;
      
-        public double AnnualSalary { get { return annualsalary;} }
-        public EmployeePayInfo(string name, double annualsalary, double annualbonus) 
+        public float AnnualSalary { get { return annualSalary;} }
+        public EmployeePayInfo(string name, float annualsalary, float annualbonus) 
         {
-            this.annualsalary = annualsalary;
-            this.annualbonus = annualbonus;
+            this.annualSalary = annualsalary;
+            this.annualBonus = annualbonus;
         }
-        public void calculateTotalAnnualandBounsPay() 
+        public virtual void CalculateAnnualBounsPay() 
         {
-            double annual = annualsalary;
-            double bonus = annualbonus;
-            double total = annual + bonus;  
+            float annual = annualSalary;
+            float bonus = annualBonus;
+            float total = annual + bonus;
+            //Console.WriteLine(total);
+        }
+        public virtual void HourlyPay() 
+        { 
+            float hoursInAYear = 35 * 52;
+            float hourSalary =  annualSalary / hoursInAYear;
+            //Console.WriteLine($" Hour Salary is £{hourSalary:N2} ");
         }
     }
 }
