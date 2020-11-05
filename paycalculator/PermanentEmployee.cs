@@ -29,6 +29,6 @@ namespace paycalculator
             float hourSalary =  annualSalary / hoursInAYear;
             Console.WriteLine($" Hour Salary is £{hourSalary:N2} ");
         }
-
+        
     }
 }

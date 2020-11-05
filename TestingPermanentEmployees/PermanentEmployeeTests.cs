@@ -1,11 +1,11 @@
 using NUnit.Framework;
 using System.Transactions;
 
-namespace TestingPermanentEmployees
+namespace PermanentEmployeesTests
 {
-    public class PermanentEmployees
+    public class PermanentEmployeesTests
     {
-        PermanentEmployees eo;
+        
         [SetUp]
         public void Setup()
         {
