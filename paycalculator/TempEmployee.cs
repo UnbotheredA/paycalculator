@@ -4,37 +4,30 @@ using System.Text;
 
 namespace paycalculator
 {
-    class TempEmployee : EmployeePayInfo
+    class TempEmployee : Employee
     {
         float dayRate;
         int weeksWorked;
         string employeetypes;
-        //public enum employeetypes { Workers, Contracts, tue, Wed, thu, Fri, Sat };
+         public string EmployeeTypes { get { return employeetypes; } }
 
-        public string EmployeeTypes { get { return employeetypes; } }
-
-        //calculate how much money they made from dayrate within how many weeks they have worked.
-        public TempEmployee(string name, float annualsalary, float annualbonus, float dayRate, int weeksWorked, string employeetypes)
-        : base(name, annualsalary, annualbonus)
+         public TempEmployee(string name, float annualsalary, float annualbonus, float dayRate, int weeksWorked, string employeetypes)
+        : base(name)
         {
             this.dayRate = dayRate;
             this.weeksWorked = weeksWorked;
             this.employeetypes = employeetypes;
         }
-        //calculate total annaul pay based on how many weeks worked.
+      
         public void MoneyMadeInTotal()
-        {// Create a method that can calculate their total salary based on number of weeks worked.
+        {
             float totalMoneyMade = dayRate * weeksWorked;
             Console.WriteLine($"Total money made is £{totalMoneyMade:N2}");
         }
-
-        //make another method that can calculate thier hourly pay based on their day rate
-
         public override void HourlyPay()
-        {//  that can calculate their hourly pay based on how many weeks worked.
-          //dayRate
-           Console.WriteLine();
+        {
+            float hourPay = dayRate / 7;
+            Console.WriteLine($"Hourly pay is £ {hourPay:N2}");
         }
     }
 }
-//error https://stackoverflow.com/questions/63957152/error-cs7036-there-is-no-argument-given-that-corresponds-to-the-required-formal
