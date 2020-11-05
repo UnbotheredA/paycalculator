@@ -8,11 +8,13 @@ namespace paycalculator
     {
          static void Main(string[] args)
         {
-            EmployeePayInfo eo = new EmployeePayInfo("Aala", 40000, 4000);
-            eo.CalculateAnnualBounsPay();
-            eo.HourlyPay();
-            TempEmployee teo = new TempEmployee("Ruby", 0, 0, 60.20f, 30, "Contract");
+            PermanentEmployee peo = new PermanentEmployee("Aala", 40000, 4000);
+            //peo.CalculateAnnualBounsPay();
+           // peo.HourlyPay();
+            TempEmployee teo = new TempEmployee("Ruby", 0, 0, 50.00f, 30, "Contract");
+            //Employee harry = new Employee("harry");
             teo.MoneyMadeInTotal();
+            teo.HourlyPay();
             Console.WriteLine("The type of employee is:" + teo.EmployeeTypes);
             //Console.WriteLine(eo.AnnualSalary);
         }
