@@ -3,11 +3,15 @@
     public abstract class Employee
     {
         public string Name { get; set; }//properties fields start with capital letter
+      
         public Employee(string name) 
         {
             Name = name;
-        
+          
         }
-        public abstract void HourlyPay();
-    }
+        public abstract float HourlyPay();
+        
+        //public abstract void CalculateTotalPay();
+      }
+
 }

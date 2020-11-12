@@ -16,18 +16,19 @@ namespace paycalculator
             annualSalary = annualsalary;
             annualBonus = annualbonus;
         }
-        public virtual void CalculateAnnualBounsPay() 
+        public virtual float CalculateAnnualBounsPay() 
         {
             float annual = annualSalary;
             float bonus = annualBonus;
             float total = annual + bonus;
-            Console.WriteLine(total);
+            return total;
         }
-        public override void HourlyPay() 
+        public override float HourlyPay() 
         { 
             float hoursInAYear = 35 * 52;
             float hourSalary =  annualSalary / hoursInAYear;
-            Console.WriteLine($" Hour Salary is £{hourSalary:N2} ");
+            return hourSalary;
+            //Console.WriteLine($" Hour Salary is £{hourSalary:N2} ");
         }
         
     }

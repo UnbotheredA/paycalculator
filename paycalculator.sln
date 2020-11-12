@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30611.23
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "paycalculator", "paycalculator\paycalculator.csproj", "{88DDCA97-307F-4ED8-8D59-0A07CDDB413B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "paycalculator", "paycalculator\paycalculator.csproj", "{88DDCA97-307F-4ED8-8D59-0A07CDDB413B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PayCalculatorTest", "PayCalculatorTest", "{D41899D8-AE49-489B-BBE8-C0D3B7691E88}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NUnitTestProject1", "NUnitTestProject1\NUnitTestProject1.csproj", "{1B547E12-B3A2-420B-ADC0-8E54CC82C49E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +19,16 @@ Global
 		{88DDCA97-307F-4ED8-8D59-0A07CDDB413B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{88DDCA97-307F-4ED8-8D59-0A07CDDB413B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{88DDCA97-307F-4ED8-8D59-0A07CDDB413B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B547E12-B3A2-420B-ADC0-8E54CC82C49E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B547E12-B3A2-420B-ADC0-8E54CC82C49E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B547E12-B3A2-420B-ADC0-8E54CC82C49E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B547E12-B3A2-420B-ADC0-8E54CC82C49E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1B547E12-B3A2-420B-ADC0-8E54CC82C49E} = {D41899D8-AE49-489B-BBE8-C0D3B7691E88}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AC2DF282-CEF1-4775-84FB-5FAB2BC23EE7}
