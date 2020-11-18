@@ -7,27 +7,25 @@ namespace paycalculator
 {
     class TempEmployee : Employee
     {
-        float dayRate;
-        int weeksWorked;
-        string employeetypes;
-        public string EmployeeTypes { get { return employeetypes; } }
+        private decimal dayRate;
+        private int weeksWorked;
 
-        public TempEmployee(string name, float annualsalary, float annualbonus, float dayRate, int weeksWorked, string employeetypes)
-       : base(name)
+        public TempEmployee(string name, EmployeeType employeeType, decimal annualsalary, decimal annualBonus, decimal dayRate, int weeksWorked)
+       : base(name, employeeType)
         {
             this.dayRate = dayRate;
             this.weeksWorked = weeksWorked;
-            this.employeetypes = employeetypes;
+         }
+
+        public decimal MoneyMadeInTotal()
+        {
+            return dayRate * weeksWorked; 
         }
 
-        public float MoneyMadeInTotal() => dayRate / weeksWorked;
-        
-          //return dayRate * weeksWorked;  
-        
-        public override float HourlyPay()
+        public override decimal HourlyPay()
         {
-          return  dayRate / 7;
-          //Console.WriteLine($"Hourly pay is £ {hourPay:N2}");
+            return dayRate / 7;
+            //Console.WriteLine($"Hourly pay is £ {hourPay:N2}");
         }
     }
 }

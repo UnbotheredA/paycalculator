@@ -6,29 +6,29 @@ namespace paycalculator
 {
     class PermanentEmployee : Employee
     {
-        float annualSalary;
-        float annualBonus;
-        public float AnnualSalary { get { return annualSalary; } }
+        decimal annualSalary;
+        decimal annualBonus;
+        public decimal AnnualSalary { get { return annualSalary; } }
       
 
-        public PermanentEmployee(string name, float annualsalary, float annualbonus) : base (name)
+        public PermanentEmployee( string name, EmployeeType employeeType, decimal annualSalary, decimal annualBonus) : base (name, employeeType)
         {
-            annualSalary = annualsalary;
-            annualBonus = annualbonus;
+            this.annualSalary = annualSalary;
+            this.annualBonus = annualBonus;
         }
-        public virtual float CalculateAnnualBounsPay() 
+        public virtual decimal CalculateAnnualBounsPay() 
         {
-            float annual = annualSalary;
-            float bonus = annualBonus;
-            float total = annual + bonus;
+            decimal annual = annualSalary;
+            decimal bonus = annualBonus;
+            decimal total = annual + bonus;
             return total;
         }
-        public override float HourlyPay() 
-        { 
-            float hoursInAYear = 35 * 52;
-            float hourSalary =  annualSalary / hoursInAYear;
-            return hourSalary;
-            //Console.WriteLine($" Hour Salary is £{hourSalary:N2} ");
+        public override decimal HourlyPay()
+        {
+            decimal hoursInAYear = 35 * 52;
+            decimal hourSalary = annualSalary / hoursInAYear;
+            decimal formatHourSalary = decimal.ToInt32(hourSalary);
+            return formatHourSalary;
         }
         
     }
