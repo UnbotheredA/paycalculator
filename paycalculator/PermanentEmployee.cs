@@ -7,19 +7,19 @@ namespace paycalculator
     class PermanentEmployee : Employee
     {
         decimal annualSalary;
-        decimal annualBonus;
+        public decimal AnnualBonus;
         public decimal AnnualSalary { get { return annualSalary; } }
       
 
-        public PermanentEmployee( string name, EmployeeType employeeType, decimal annualSalary, decimal annualBonus) : base (name, employeeType)
+        public PermanentEmployee( string name, decimal annualSalary, decimal annualBonus) : base (name, EmployeeType.Permanent)
         {
             this.annualSalary = annualSalary;
-            this.annualBonus = annualBonus;
+            AnnualBonus = annualBonus;
         }
         public virtual decimal CalculateAnnualBounsPay() 
         {
             decimal annual = annualSalary;
-            decimal bonus = annualBonus;
+            decimal bonus = AnnualBonus;
             decimal total = annual + bonus;
             return total;
         }

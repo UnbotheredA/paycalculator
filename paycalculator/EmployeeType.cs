@@ -8,7 +8,6 @@ namespace paycalculator
     {
         contract,
         temp,
-        Permanet
-
+        Permanent,   
     }
 }
