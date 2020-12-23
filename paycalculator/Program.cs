@@ -10,18 +10,20 @@ namespace paycalculator
 
         public static void Main(string[] args)
         {
-            PermanentEmployee p1 = new PermanentEmployee(name:"Joe Bloggs", 40000, 5000);
-            PermanentEmployee p2 = new PermanentEmployee(name:"John Smith", 45000, 2500);
+            PermanentEmployee p1 = new PermanentEmployee(name:"Joe Bloggs", 40000, 5000, holidayAllowance: 21);
+            PermanentEmployee p2 = new PermanentEmployee(name:"John Smith", 45000, 2500,21);
+            Console.WriteLine(p1.AllowanceRemaning(4));
             Console.WriteLine($"The total of money made with bouns is £{p1.CalculateAnnualBounsPay()}");
             Console.WriteLine($"Hourly pay for a permanet employee is £{p1.HourlyPay()}");
             TempEmployee t1 = new TempEmployee(name:"Clares Jones", annualsalary:0, annualBonus:0, dayRate:350,weeksWorked: 40);
             Console.WriteLine($"The money made in total is £{t1.MoneyMadeInTotal()}");
             Console.WriteLine($"The hourly pay for temp is £{t1.HourlyPay()}");
-            Program po = new Program();
-            po.DisplayContent(p1,p2, t1);
+            //Program po = new Program();
+           //po.DisplayContent(p1,p2, t1);
+            DisplayContent(p1,p2,t1);
          }
 
-        public void DisplayContent(PermanentEmployee p1, PermanentEmployee p2, TempEmployee t1)
+        public static void DisplayContent(PermanentEmployee p1, PermanentEmployee p2, TempEmployee t1)
         {
             Console.WriteLine("   Name " + "   Type Of Employee " + "  Annaul Salary "  +   "          Bouns       " +        "          Day Rate      " + " " + " Weeks Worked ");
                         
