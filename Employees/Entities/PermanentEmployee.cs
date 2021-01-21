@@ -1,10 +1,10 @@
-﻿using System;
-using System.Globalization;
-using System.Linq.Expressions;
+﻿
 
-namespace paycalculator
+using Employees.Services;
+
+namespace Employees.Entites
 {
-    class PermanentEmployee : Employee,IHolidayCalculator
+    public class PermanentEmployee : Employee,IHolidayCalculator
     {
         decimal annualSalary;
         public decimal AnnualBonus;
@@ -37,7 +37,6 @@ namespace paycalculator
         {
             HolidayAllowance = HolidayAllowance - hoursOff;
             return HolidayAllowance;
-
         }
     }
 }

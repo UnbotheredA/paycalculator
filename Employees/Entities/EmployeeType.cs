@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace paycalculator
+namespace Employees.Entites
 {
    public enum EmployeeType
     {

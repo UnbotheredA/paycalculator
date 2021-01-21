@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reflection.Metadata.Ecma335;
-using System.Text;
-
-namespace paycalculator
+﻿
+namespace Employees.Entites
 {
-    class TempEmployee : Employee
+    public class TempEmployee : Employee
     {
         public decimal DayRate;
         public int WeeksWorked;

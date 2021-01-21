@@ -1,6 +1,7 @@
-﻿using System;
-using System.Globalization;
-using System.Linq.Expressions;
+﻿using Newtonsoft.Json;
+using System;
+using Employees.Entites;
+using Employees.Services;
 
 namespace paycalculator
 {
@@ -10,7 +11,12 @@ namespace paycalculator
 
         public static void Main(string[] args)
         {
-            PermanentEmployee p1 = new PermanentEmployee(name:"Joe Bloggs", 40000, 5000, holidayAllowance: 21);
+
+
+            PermanentEmployee p1 = new PermanentEmployee(name: "Joe Bloggs", 40000, 5000, holidayAllowance: 21);
+            string jsonString = JsonConvert.SerializeObject(p1);
+            Console.WriteLine(jsonString);
+
             PermanentEmployee p2 = new PermanentEmployee(name:"John Smith", 45000, 2500,21);
             Console.WriteLine(p1.AllowanceRemaning(4));
             Console.WriteLine($"The total of money made with bouns is £{p1.CalculateAnnualBounsPay()}");
@@ -18,8 +24,6 @@ namespace paycalculator
             TempEmployee t1 = new TempEmployee(name:"Clares Jones", annualsalary:0, annualBonus:0, dayRate:350,weeksWorked: 40);
             Console.WriteLine($"The money made in total is £{t1.MoneyMadeInTotal()}");
             Console.WriteLine($"The hourly pay for temp is £{t1.HourlyPay()}");
-            //Program po = new Program();
-           //po.DisplayContent(p1,p2, t1);
             DisplayContent(p1,p2,t1);
          }
 
