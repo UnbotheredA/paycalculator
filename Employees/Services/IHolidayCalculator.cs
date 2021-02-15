@@ -9,4 +9,3 @@ namespace Employees.Services
         int AllowanceRemaning(int hourOff); 
     }
 }
-// services are classess that only have functionality and does a lot of calculation

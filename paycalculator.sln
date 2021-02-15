@@ -9,7 +9,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PayCalculatorTest", "PayCal
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NUnitTestProject1", "NUnitTestProject1\NUnitTestProject1.csproj", "{1B547E12-B3A2-420B-ADC0-8E54CC82C49E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Employees", "Employees\Employees.csproj", "{4BE7FB91-3A17-4464-985B-67775B2BA22B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Employees", "Employees\Employees.csproj", "{4BE7FB91-3A17-4464-985B-67775B2BA22B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayCalculatorAPI", "PayCalculatorAPI\PayCalculatorAPI.csproj", "{0D9D973C-D83C-41ED-855D-41954F6FCA8B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +31,10 @@ Global
 		{4BE7FB91-3A17-4464-985B-67775B2BA22B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4BE7FB91-3A17-4464-985B-67775B2BA22B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4BE7FB91-3A17-4464-985B-67775B2BA22B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D9D973C-D83C-41ED-855D-41954F6FCA8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D9D973C-D83C-41ED-855D-41954F6FCA8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D9D973C-D83C-41ED-855D-41954F6FCA8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D9D973C-D83C-41ED-855D-41954F6FCA8B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

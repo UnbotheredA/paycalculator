@@ -4,10 +4,10 @@ using System.Text;
 
 namespace Employees.Entites
 {
-   public enum EmployeeType
+    public enum EmployeeType
     {
         contract,
         temp,
-        Permanent,   
+        Permanent,
     }
 }
