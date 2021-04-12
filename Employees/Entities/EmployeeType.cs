@@ -6,8 +6,8 @@ namespace Employees.Entites
 {
     public enum EmployeeType
     {
-        contract,
-        temp,
+        Contract,
+        Temp,
         Permanent,
     }
 }
