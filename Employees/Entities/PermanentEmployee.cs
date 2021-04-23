@@ -10,9 +10,8 @@ namespace Employees.Entites
         decimal annualSalary;
         public decimal AnnualBonus;
         public decimal AnnualSalary { get { return annualSalary; } }
-        public int HolidayAllowance; // is allowed to take off 
+        public int HolidayAllowance; 
 
-        //make it that annual pay can't be zero
         public PermanentEmployee(string name, decimal annualSalary, decimal annualBonus, int holidayAllowance) : base(name, EmployeeType.Permanent)
         {
             if (annualSalary > 0 && annualBonus > 0)

@@ -1,59 +1,81 @@
-﻿using Newtonsoft.Json;
+﻿using Employees.Entites;
+using Employees.Entities;
+using Employees.Entities.JSON;
 using System;
-using Employees.Entites;
 using Employees;
-using Employees.Services;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration.Json;
+using System.Collections.Generic;
 
 namespace paycalculator
 {
     class Program
     {
-
-        public static void Main(string[] args)
+        static JSONFileLocator JSONFileLocator = new JSONFileLocator();
+       
+        static void Main(string[] args)
         {
-            PermanentEmployee permanentEmployee1 = new PermanentEmployee(name: "Joe Bloggs", 40000, 5000, holidayAllowance: 21);
-            PermanentEmployee permanentEmployee2 = new PermanentEmployee(name: "John Smith", 45000, 2500, 21);
-            Console.WriteLine(permanentEmployee1.AllowanceRemaning(4));
-            Console.WriteLine($"The total of money made with bouns is £{permanentEmployee1.CalculateAnnualBounsPay()}");
-            Console.WriteLine($"Hourly pay for a permanet employee is £{permanentEmployee1.HourlyPay()}");
-            TempEmployee tempEmployee1 = new TempEmployee(name: "Clares Jones", annualsalary: 0, annualBonus: 0, dayRate: 350, weeksWorked: 40);
-            Console.WriteLine($"The money made in total is £{tempEmployee1.MoneyMadeInTotal()}");
-            Console.WriteLine($"The hourly pay for temp is £{tempEmployee1.HourlyPay()}");
-            DisplayContent(permanentEmployee1, permanentEmployee2, tempEmployee1);
 
+            DisplayEmployees displayEmployees = new DisplayEmployees();
+            displayEmployees.DisplayContent(displayEmployees.permanentEmployee1,displayEmployees.tempEmployee1);
 
-            PermanentEmployeeJSON peo = new PermanentEmployeeJSON();
-            peo.WriteToEmployeeFile(peo.PermanentEmployee6);
-            foreach (var readPermanentFile in peo.ReadFromEmployeeFile())
-            {
-                Console.WriteLine(readPermanentFile);
-            }
-
-            TempEmployeeJSON teo = new TempEmployeeJSON();
-            Console.WriteLine("The current directory is:" + teo.path);
-            teo.WriteToEmployeeFile(teo.TempEmployee2);
-
-            foreach (var readTempEmployeeFile in teo.ReadFromEmployeeFile())
-            {
-                Console.WriteLine(readTempEmployeeFile);
-            }
+            IConfiguration config = new ConfigurationBuilder().AddJsonFile(@"appsettings.json", false, true).Build();
+            
+            string dirForTempJSONFile = config["TempPath"];
+            string tempEmployeeAbsoulatePath = JSONFileLocator.FindJsonFile(dirForTempJSONFile);
+            WriteEmployeeInputtedDataToFile.TempEmployeeJSONFormatter.JSONFilePath = tempEmployeeAbsoulatePath;
+            WriteEmployeeInputtedDataToFile.TempEmployeeAbsoulatePath = tempEmployeeAbsoulatePath;
+           
+            string dirForPermanentEmployeeJSONFile = config["PermanentPath"];
+            string permanentEmployeeAbsoulatePath =  JSONFileLocator.FindJsonFile(dirForPermanentEmployeeJSONFile);
+            WriteEmployeeInputtedDataToFile.PermanentEmployeeJSONFormatter.JSONFilePath = permanentEmployeeAbsoulatePath;
+            WriteEmployeeInputtedDataToFile.PermanentEmployeeAbsoulatePath = permanentEmployeeAbsoulatePath;
+            
+            EmployeeAction();
+    
         }
-
-        static void DisplayContent(PermanentEmployee p1, PermanentEmployee p2, TempEmployee t1)
+        private static void EmployeeAction()
         {
-            Console.WriteLine("   Name " + "   Type Of Employee " + "  Annaul Salary " + "          Bouns       " + "          Day Rate      " + " " + " Weeks Worked ");
-
-            Console.WriteLine("__________|______________|_________________________|___________________|_______________|______________|");
-            Console.WriteLine("|         |              |                         |                   |               |              |");
-            Console.WriteLine($"{p1.Name}    {p1.EmployeeType}              {p1.AnnualSalary}                   {p1.AnnualBonus}          N/A             N/A");
-            Console.WriteLine("__________|______________|_________________________|___________________|_______________|______________|");
-            Console.WriteLine("|         |              |                         |                   |               |              |");
-            Console.WriteLine($"{p2.Name}    {p2.EmployeeType}              {p2.AnnualSalary}                   {p2.AnnualBonus}          N/A             N/A");
-            Console.WriteLine("__________|______________|_________________________|___________________|_______________|______________|");
-            Console.WriteLine("|         |              |                         |                   |               |              |");
-            Console.WriteLine($"{t1.Name}    {t1.EmployeeType}            N/A                  N/A                       {t1.DayRate}                 {t1.WeeksWorked}      ");
-            Console.WriteLine("__________|______________|_________________________|___________________|_______________|______________|");
+            Console.WriteLine("Type p1 to add  permanent employee, rp2 to read permanent employee and type t1 to add temp employee and rt2 to read all temp employees and type done to exit application");
+            bool isDone = false;
+    
+            while (!isDone)
+            {
+                string action = Console.ReadLine();
+                switch (action)
+                {
+                    case "p1":
+                        WriteEmployeeInputtedDataToFile.AddPermanentEmployeeToJson(WriteEmployeeInputtedDataToFile.PermanentEmployeeJSONFormatter);
+                        Console.WriteLine("Type p1 to add  permanent employee, rp2 to read permanent employee and type t1 to add temp employee and rt2 to read all temp employees and type done to exit application");
+                        break;
+                    case "rp2":
+                        EmployeeList<PermanentEmployee> employeeListPermanent = new EmployeeList<PermanentEmployee>();
+                        employeeListPermanent.ReadEmployeeList(WriteEmployeeInputtedDataToFile.PermanentEmployeeJSONFormatter.ReadList());
+                        Console.WriteLine("Type p1 to add  permanent employee, rp2 to read permanent employee and type t1 to add temp employee and rt2 to read all temp employees and type done to exit application");
+                        break;
+                    case "t1":
+                        WriteEmployeeInputtedDataToFile.AddTempEmployeeToJson(WriteEmployeeInputtedDataToFile.TempEmployeeJSONFormatter);
+                        Console.WriteLine("Type p1 to add  permanent employee, rp2 to read permanent employee and type t1 to add temp employee and rt2 to read all temp employees and type done to exit application");
+                        break;
+                    case "rt2":
+                        EmployeeList<TempEmployee> employeeListTemp = new EmployeeList<TempEmployee>();
+                        employeeListTemp.ReadEmployeeList(WriteEmployeeInputtedDataToFile.TempEmployeeJSONFormatter.ReadList());
+                        Console.WriteLine("Type p1 to add  permanent employee, rp2 to read permanent employee and type t1 to add temp employee and rt2 to read all temp employees and type done to exit application");
+                        break;
+                    case "remove":
+                        break;
+                    case "done":
+                        isDone = true;
+                        break;
+                    default:
+                        Console.WriteLine("something wrong");
+                        isDone = true;
+                        break;
+                }
+            }
         }
     }
 }
+
+
 

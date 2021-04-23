@@ -2,7 +2,7 @@
 
 namespace Employees.Entites
 {
-    public abstract class Employee 
+    public abstract class Employee
     {
         public string Name;
         public EmployeeType EmployeeType;
@@ -20,10 +20,6 @@ namespace Employees.Entites
 
         public abstract decimal HourlyPay();
 
-        public virtual Employee readEmployeeTextLine(string employeeData)
-        {
-            throw new System.NotImplementedException();
-        }
-
     }
+
 }
