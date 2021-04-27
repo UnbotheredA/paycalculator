@@ -1,44 +1,41 @@
-﻿using Employees.Entites;
+﻿using Employees;
+using Employees.Entites;
 using Employees.Entities;
-using Employees.Entities.JSON;
-using System;
-using Employees;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Configuration.Json;
-using System.Collections.Generic;
+using System;
 
 namespace paycalculator
 {
     class Program
     {
         static JSONFileLocator JSONFileLocator = new JSONFileLocator();
-       
+
         static void Main(string[] args)
         {
 
             DisplayEmployees displayEmployees = new DisplayEmployees();
-            displayEmployees.DisplayContent(displayEmployees.permanentEmployee1,displayEmployees.tempEmployee1);
+            displayEmployees.DisplayContent(displayEmployees.permanentEmployee1, displayEmployees.tempEmployee1);
 
             IConfiguration config = new ConfigurationBuilder().AddJsonFile(@"appsettings.json", false, true).Build();
-            
+
             string dirForTempJSONFile = config["TempPath"];
             string tempEmployeeAbsoulatePath = JSONFileLocator.FindJsonFile(dirForTempJSONFile);
             WriteEmployeeInputtedDataToJSONFile.TempEmployeeJSONFormatter.JSONFilePath = tempEmployeeAbsoulatePath;
             WriteEmployeeInputtedDataToJSONFile.TempEmployeeAbsoulatePath = tempEmployeeAbsoulatePath;
-           
+
             string dirForPermanentEmployeeJSONFile = config["PermanentPath"];
-            string permanentEmployeeAbsoulatePath =  JSONFileLocator.FindJsonFile(dirForPermanentEmployeeJSONFile);
+            string permanentEmployeeAbsoulatePath = JSONFileLocator.FindJsonFile(dirForPermanentEmployeeJSONFile);
             WriteEmployeeInputtedDataToJSONFile.PermanentEmployeeJSONFormatter.JSONFilePath = permanentEmployeeAbsoulatePath;
             WriteEmployeeInputtedDataToJSONFile.PermanentEmployeeAbsoulatePath = permanentEmployeeAbsoulatePath;
-            
+
             EmployeeAction();
-    
+
         }
         private static void EmployeeAction()
         {
             Console.WriteLine("Type p1 to add  permanent employee, rp2 to read permanent employee and type t1 to add temp employee and rt2 to read all temp employees and type done to exit application");
             bool isDone = false;
-    
+
             while (!isDone)
             {
                 string action = Console.ReadLine();

@@ -7,9 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "paycalculator", "paycalcula
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Employees", "Employees\Employees.csproj", "{4BE7FB91-3A17-4464-985B-67775B2BA22B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayCalculatorAPI", "PayCalculatorAPI\PayCalculatorAPI.csproj", "{D7C78FB5-7D3F-433E-A8D7-28172C3CF2D9}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeTests", "EmployeeTests\EmployeeTests.csproj", "{87EAF3D8-0F26-473F-BAC7-EDA81FA9589B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeTests", "EmployeeTests\EmployeeTests.csproj", "{87EAF3D8-0F26-473F-BAC7-EDA81FA9589B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,10 +23,6 @@ Global
 		{4BE7FB91-3A17-4464-985B-67775B2BA22B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4BE7FB91-3A17-4464-985B-67775B2BA22B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4BE7FB91-3A17-4464-985B-67775B2BA22B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D7C78FB5-7D3F-433E-A8D7-28172C3CF2D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D7C78FB5-7D3F-433E-A8D7-28172C3CF2D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D7C78FB5-7D3F-433E-A8D7-28172C3CF2D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D7C78FB5-7D3F-433E-A8D7-28172C3CF2D9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{87EAF3D8-0F26-473F-BAC7-EDA81FA9589B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{87EAF3D8-0F26-473F-BAC7-EDA81FA9589B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{87EAF3D8-0F26-473F-BAC7-EDA81FA9589B}.Release|Any CPU.ActiveCfg = Release|Any CPU

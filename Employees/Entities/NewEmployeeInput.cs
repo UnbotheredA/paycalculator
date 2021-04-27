@@ -6,8 +6,6 @@ namespace Employees.Entities
 {
     public static class NewEmployeeInput
     {
-        public static string PermanentPath = @"..\..\..\..\Employees\Data\PermanentEmployee.json";
-        public static string TempPath = @"..\..\..\..\Employees\Data\TempEmployee.json";
         private static string nameInput;
         private static decimal convertedSalary;
         private static decimal convertedBonus;

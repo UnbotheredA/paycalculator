@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Employees.Entities
 {
-    public static class WriteEmployeeInputtedDataToFile
+    public static class WriteEmployeeInputtedDataToJSONFile
     {
         public static EmployeeList<PermanentEmployee> employeeListPermanent = new EmployeeList<PermanentEmployee>();
         public static EmployeeList<TempEmployee> employeeListTemp = new EmployeeList<TempEmployee>();
