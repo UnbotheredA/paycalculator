@@ -23,13 +23,13 @@ namespace paycalculator
             
             string dirForTempJSONFile = config["TempPath"];
             string tempEmployeeAbsoulatePath = JSONFileLocator.FindJsonFile(dirForTempJSONFile);
-            WriteEmployeeInputtedDataToFile.TempEmployeeJSONFormatter.JSONFilePath = tempEmployeeAbsoulatePath;
-            WriteEmployeeInputtedDataToFile.TempEmployeeAbsoulatePath = tempEmployeeAbsoulatePath;
+            WriteEmployeeInputtedDataToJSONFile.TempEmployeeJSONFormatter.JSONFilePath = tempEmployeeAbsoulatePath;
+            WriteEmployeeInputtedDataToJSONFile.TempEmployeeAbsoulatePath = tempEmployeeAbsoulatePath;
            
             string dirForPermanentEmployeeJSONFile = config["PermanentPath"];
             string permanentEmployeeAbsoulatePath =  JSONFileLocator.FindJsonFile(dirForPermanentEmployeeJSONFile);
-            WriteEmployeeInputtedDataToFile.PermanentEmployeeJSONFormatter.JSONFilePath = permanentEmployeeAbsoulatePath;
-            WriteEmployeeInputtedDataToFile.PermanentEmployeeAbsoulatePath = permanentEmployeeAbsoulatePath;
+            WriteEmployeeInputtedDataToJSONFile.PermanentEmployeeJSONFormatter.JSONFilePath = permanentEmployeeAbsoulatePath;
+            WriteEmployeeInputtedDataToJSONFile.PermanentEmployeeAbsoulatePath = permanentEmployeeAbsoulatePath;
             
             EmployeeAction();
     
@@ -45,21 +45,21 @@ namespace paycalculator
                 switch (action)
                 {
                     case "p1":
-                        WriteEmployeeInputtedDataToFile.AddPermanentEmployeeToJson(WriteEmployeeInputtedDataToFile.PermanentEmployeeJSONFormatter);
+                        WriteEmployeeInputtedDataToJSONFile.AddPermanentEmployeeToJson(WriteEmployeeInputtedDataToJSONFile.PermanentEmployeeJSONFormatter);
                         Console.WriteLine("Type p1 to add  permanent employee, rp2 to read permanent employee and type t1 to add temp employee and rt2 to read all temp employees and type done to exit application");
                         break;
                     case "rp2":
                         EmployeeList<PermanentEmployee> employeeListPermanent = new EmployeeList<PermanentEmployee>();
-                        employeeListPermanent.ReadEmployeeList(WriteEmployeeInputtedDataToFile.PermanentEmployeeJSONFormatter.ReadList());
+                        employeeListPermanent.ReadEmployeeList(WriteEmployeeInputtedDataToJSONFile.PermanentEmployeeJSONFormatter.ReadList());
                         Console.WriteLine("Type p1 to add  permanent employee, rp2 to read permanent employee and type t1 to add temp employee and rt2 to read all temp employees and type done to exit application");
                         break;
                     case "t1":
-                        WriteEmployeeInputtedDataToFile.AddTempEmployeeToJson(WriteEmployeeInputtedDataToFile.TempEmployeeJSONFormatter);
+                        WriteEmployeeInputtedDataToJSONFile.AddTempEmployeeToJson(WriteEmployeeInputtedDataToJSONFile.TempEmployeeJSONFormatter);
                         Console.WriteLine("Type p1 to add  permanent employee, rp2 to read permanent employee and type t1 to add temp employee and rt2 to read all temp employees and type done to exit application");
                         break;
                     case "rt2":
                         EmployeeList<TempEmployee> employeeListTemp = new EmployeeList<TempEmployee>();
-                        employeeListTemp.ReadEmployeeList(WriteEmployeeInputtedDataToFile.TempEmployeeJSONFormatter.ReadList());
+                        employeeListTemp.ReadEmployeeList(WriteEmployeeInputtedDataToJSONFile.TempEmployeeJSONFormatter.ReadList());
                         Console.WriteLine("Type p1 to add  permanent employee, rp2 to read permanent employee and type t1 to add temp employee and rt2 to read all temp employees and type done to exit application");
                         break;
                     case "remove":

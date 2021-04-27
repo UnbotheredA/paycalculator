@@ -13,11 +13,6 @@ namespace Employees.Entites
             EmployeeType = employeetype;
         }
 
-        public virtual string GetEmployeeTextLine()
-        {
-            throw new System.NotImplementedException();
-        }
-
         public abstract decimal HourlyPay();
 
     }
