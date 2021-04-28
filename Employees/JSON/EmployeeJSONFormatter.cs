@@ -15,6 +15,7 @@ namespace Employees.Entities.JSON
         {
             JSONFilePath = path;
         }
+
         public List<T> ReadFromList()
         {
             string contentOfFile = File.ReadAllText(JSONFilePath);
@@ -22,7 +23,7 @@ namespace Employees.Entities.JSON
             return convertedToList;
 
         }
-        //This method will merge another list to this list and then serialize the collection to JSON.
+
         public string WriteToFile(List<T> newList)
         {
             ReadJSONList = ReadFromList();//turns a JSON file to C# collection
@@ -31,7 +32,7 @@ namespace Employees.Entities.JSON
             File.WriteAllText(JSONFilePath, convertToJson);
             return convertToJson;
         }
-        // This method will be passsed as an arugment from ReadEmployeeList method
+        
         public List<T> ReadList()
         {
             var readlist = ReadFromList();
