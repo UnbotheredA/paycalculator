@@ -14,7 +14,7 @@ namespace paycalculator
         {
 
             DisplayEmployees displayEmployees = new DisplayEmployees();
-            displayEmployees.DisplayContent(displayEmployees.permanentEmployee1, displayEmployees.tempEmployee1);
+            displayEmployees.DisplayContent(displayEmployees.permanentEmployee1,displayEmployees.permanentEmployee2,displayEmployees.tempEmployee1);
 
             IConfiguration config = new ConfigurationBuilder().AddJsonFile(@"appsettings.json", false, true).Build();
 

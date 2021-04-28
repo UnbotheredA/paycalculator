@@ -1,6 +1,4 @@
-﻿using Employees.Services;
-
-namespace Employees.Entites
+﻿namespace Employees.Entites
 {
     public abstract class Employee
     {

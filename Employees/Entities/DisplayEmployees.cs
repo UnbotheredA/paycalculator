@@ -13,6 +13,7 @@ namespace Employees.Entities
         {
             string[] titles = { "Name", " Type Of Employee", " Annual Salary", "Bonus", "Day Rate ", "Weeks Worked" };
             Console.WriteLine(string.Format("{0} {1} {2} {3} {4} {5}", titles[0].PadLeft(4), titles[1].PadLeft(20), titles[2].PadLeft(18), titles[3].PadLeft(20), titles[4].PadLeft(20), titles[5].PadLeft(16)));
+            Console.WriteLine("________________________________________________________________________________________________________");
         }
 
         public void DisplayContent(params Employee[] allEmployees)
@@ -27,11 +28,7 @@ namespace Employees.Entities
                     Console.WriteLine("|          |              |                         |                   |                |              |");
                     Console.WriteLine($"{value.Name} {value.EmployeeType.ToString().PadLeft(12)} {permanentEmployee.AnnualSalary.ToString().PadLeft(20)} {permanentEmployee.AnnualBonus.ToString().PadLeft(20)}");
                     Console.WriteLine("|__________|_____________ |_________________________|___________________|________________|______________|");
-                    Console.WriteLine("|          |              |                         |                   |                |              |");
-                    Console.WriteLine($"{value.Name} {value.EmployeeType.ToString().PadLeft(12)} {permanentEmployee.AnnualSalary.ToString().PadLeft(20)} {permanentEmployee.AnnualBonus.ToString().PadLeft(20)}");
-                    Console.WriteLine("|__________|_____________ |_________________________|___________________|________________|______________|");
                 }
-
                 else if (value is TempEmployee)
                 {
                     TempEmployee tempEmployee = (TempEmployee)value;
@@ -43,9 +40,7 @@ namespace Employees.Entities
                 {
                     Console.WriteLine("Not the correct employees");
                 }
-
             }
-
         }
 
     }

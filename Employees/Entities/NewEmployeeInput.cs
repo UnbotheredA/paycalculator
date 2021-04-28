@@ -1,5 +1,4 @@
 ﻿using Employees.Entites;
-using Employees.Entities.JSON;
 using System;
 
 namespace Employees.Entities
@@ -26,21 +25,10 @@ namespace Employees.Entities
             Console.WriteLine("enter allowance");
             var holidayAllowanceInput = Console.ReadLine();
             int.TryParse(holidayAllowanceInput, out convertedholidayvalue);
-            return new PermanentEmployee (nameInput, convertedSalary, convertedBonus, convertedholidayvalue);
+            return new PermanentEmployee(nameInput, convertedSalary, convertedBonus, convertedholidayvalue);
         }
-        //read this method to understand
-        //public static void AddedPermanentEmployee(PermanentEmployeeJSON peo)
-        //{
-           
-        //    peo.WriteToEmployeeFile(UserInputPermanentEmployee());
-        //    foreach (var readPermanentFile in peo.ReadFromEmployeeFile())
-        //    {
-        //        Console.WriteLine(readPermanentFile);
-        //    }
-        //    Console.WriteLine("new user added to permanent employee file " + nameInput); 
-        //}
 
-        public static TempEmployee UserInputTempEmployee () 
+        public static TempEmployee UserInputTempEmployee()
         {
             Console.WriteLine("Write your name");
             nameInput = Console.ReadLine();
@@ -52,14 +40,6 @@ namespace Employees.Entities
             int.TryParse(weeksWorkedInput, out weeksWorkedConverted);
             return new TempEmployee(nameInput, dayRateConverted, weeksWorkedConverted);
         }
-        //public static void AddedTempEmployee(TempEmployeeJSON teo)
-        //{
-        //    teo.WriteToEmployeeFile(UserInputTempEmployee());
-        //    foreach (var readTempEmployeeFile in teo.ReadFromEmployeeFile())
-        //    {
-        //        Console.WriteLine(readTempEmployeeFile);
-        //    }
-        //    Console.WriteLine("new user added to temp employee file " + nameInput);
-        //}
+
     }
 }
