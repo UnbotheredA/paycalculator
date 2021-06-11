@@ -9,24 +9,20 @@ namespace Employees.Entities
 {
     public class EmployeeList<T>
     {
-        public List<T> PermanentEmployeeList = new List<T>();
-        public List<T> TempEmployeeList = new List<T>();
-
-        //Read a already existing list from anywhere 
-        public List<T> ReadEmployeeList(List<T> outputData)
+        public List<T> AddingNewPermanentEmployee = new List<T>();
+        public List<T> AddingNewTempEmployee = new List<T>();
+        public List<T> ReadEmployeeList(List<T> readThisList)
         {
             //For debugging purposes
-            var all = outputData.Count;
+            var all = readThisList.Count;
             Console.WriteLine(all);
             Console.WriteLine("ReadEmployeeList method called from employee file ");
-            return outputData;
-            
+            return readThisList;
         }
-        public List<T> AddToEmployee(List<T> inputData, T eo)
+        public List<T> AddToEmployee(List<T> addNewEmployeeToList, T newEmployee)
         {
-            inputData.Add(eo);
-            return inputData;
-
+            addNewEmployeeToList.Add(newEmployee);
+            return addNewEmployeeToList;
         }
     }
 }

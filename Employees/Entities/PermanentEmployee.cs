@@ -7,16 +7,15 @@ namespace Employees.Entites
 {
     public class PermanentEmployee : Employee, IHolidayCalculator
     {
-        decimal annualSalary;
-        public decimal AnnualBonus;
-        public decimal AnnualSalary { get { return annualSalary; } }
-        public int HolidayAllowance; 
+        public decimal AnnualSalary { get; set; }
+        public decimal AnnualBonus { get; set; }
+        public int HolidayAllowance { get; set; }
 
         public PermanentEmployee(string name, decimal annualSalary, decimal annualBonus, int holidayAllowance) : base(name, EmployeeType.Permanent)
         {
             if (annualSalary > 0 && annualBonus > 0)
             {
-                this.annualSalary = annualSalary;
+                AnnualSalary = annualSalary;
                 AnnualBonus = annualBonus;
                 HolidayAllowance = holidayAllowance;
             }
@@ -25,9 +24,14 @@ namespace Employees.Entites
                 throw new NegativeSalaryException("Annaul salary and bonus cannot be zero or less");
             }
         }
+        public override string ToString()
+        {
+            return $"{AnnualSalary}, {AnnualBonus}, {HolidayAllowance},";
+        }
+
         public decimal CalculateAnnualBounsPay()
         {
-            decimal annual = annualSalary;
+            decimal annual = AnnualSalary;
             decimal bonus = AnnualBonus;
             decimal totalIncome = annual + bonus;
             return totalIncome;
@@ -35,7 +39,7 @@ namespace Employees.Entites
         public override decimal HourlyPay()
         {
             decimal hoursInAYear = 35 * 52;
-            decimal hourSalary = annualSalary / hoursInAYear;
+            decimal hourSalary = AnnualSalary / hoursInAYear;
             decimal formatHourSalary = decimal.ToInt32(hourSalary);
             return formatHourSalary;
         }

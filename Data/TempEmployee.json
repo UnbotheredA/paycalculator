@@ -4,5 +4,11 @@
     "WeeksWorked": 0,
     "Name": "Clare Jones",
     "EmployeeType": 1
+  },
+  {
+    "DayRate": 40.0,
+    "WeeksWorked": 55,
+    "Name": "ulttest",
+    "EmployeeType": 1
   }
 ]

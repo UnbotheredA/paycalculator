@@ -5,17 +5,18 @@ namespace Employees.Entities
 {
     public static class NewEmployeeInput
     {
-        private static string nameInput;
+        public static string NameInput;
         private static decimal convertedSalary;
         private static decimal convertedBonus;
         private static int convertedholidayvalue;
-        private static decimal dayRateConverted;
-        private static int weeksWorkedConverted;
+        private static decimal convertedDayRate;
+        private static int convertedWeeksWorked;
+
 
         public static PermanentEmployee UserInputPermanentEmployee()
         {
             Console.WriteLine("Write your name");
-            nameInput = Console.ReadLine();
+            NameInput = Console.ReadLine();
             Console.WriteLine("Type your salary");
             var annualSalaryInput = Console.ReadLine();
             decimal.TryParse(annualSalaryInput, out convertedSalary);
@@ -25,21 +26,20 @@ namespace Employees.Entities
             Console.WriteLine("enter allowance");
             var holidayAllowanceInput = Console.ReadLine();
             int.TryParse(holidayAllowanceInput, out convertedholidayvalue);
-            return new PermanentEmployee(nameInput, convertedSalary, convertedBonus, convertedholidayvalue);
+            return new PermanentEmployee(NameInput, convertedSalary, convertedBonus, convertedholidayvalue);
         }
-
+        
         public static TempEmployee UserInputTempEmployee()
         {
             Console.WriteLine("Write your name");
-            nameInput = Console.ReadLine();
+            NameInput = Console.ReadLine();
             Console.WriteLine("Enter day rate");
             var dayRateInput = Console.ReadLine();
-            decimal.TryParse(dayRateInput, out dayRateConverted);
+            decimal.TryParse(dayRateInput, out convertedDayRate);
             Console.WriteLine("How many weeks worked");
             var weeksWorkedInput = Console.ReadLine();
-            int.TryParse(weeksWorkedInput, out weeksWorkedConverted);
-            return new TempEmployee(nameInput, dayRateConverted, weeksWorkedConverted);
-        }
-
+            int.TryParse(weeksWorkedInput, out convertedWeeksWorked);
+            return new TempEmployee(NameInput, convertedDayRate, convertedWeeksWorked);
+        }                  
     }
 }

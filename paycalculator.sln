@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Employees", "Employees\Empl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeTests", "EmployeeTests\EmployeeTests.csproj", "{87EAF3D8-0F26-473F-BAC7-EDA81FA9589B}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayCalculatorAPI", "PayCalculatorAPI\PayCalculatorAPI.csproj", "{05264180-95F4-4727-8B09-5CEF94A2B7DF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{87EAF3D8-0F26-473F-BAC7-EDA81FA9589B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{87EAF3D8-0F26-473F-BAC7-EDA81FA9589B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{87EAF3D8-0F26-473F-BAC7-EDA81FA9589B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05264180-95F4-4727-8B09-5CEF94A2B7DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05264180-95F4-4727-8B09-5CEF94A2B7DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05264180-95F4-4727-8B09-5CEF94A2B7DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05264180-95F4-4727-8B09-5CEF94A2B7DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

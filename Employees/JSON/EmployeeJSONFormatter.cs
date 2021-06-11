@@ -7,36 +7,63 @@ using System.IO;
 
 namespace Employees.Entities.JSON
 {
-    public class EmployeeJSONFormatter<T> : IEmployee<T>
+    public class EmployeeJSONFormatter<T> : IEmployeeRepository<T> where T : Employee
     {
+
         public List<T> ReadJSONList = new List<T>();
         public string JSONFilePath;
-        public EmployeeJSONFormatter(string path)
+
+        public EmployeeJSONFormatter(string fullPath)
         {
-            JSONFilePath = path;
+            JSONFilePath = fullPath;
         }
 
         public List<T> ReadFromList()
         {
             string contentOfFile = File.ReadAllText(JSONFilePath);
-            var convertedToList = JsonConvert.DeserializeObject<List<T>>(contentOfFile);//turned to C#
+            var convertedToList = JsonConvert.DeserializeObject<List<T>>(contentOfFile);
             return convertedToList;
-
         }
 
-        public string WriteToFile(List<T> newList)
+        public string AppenedToJsonFile(List<T> newList)
         {
-            ReadJSONList = ReadFromList();//turns a JSON file to C# collection
+            ReadJSONList = ReadFromList();
             ReadJSONList.AddRange(newList);
-            string convertToJson = JsonConvert.SerializeObject(ReadJSONList, Formatting.Indented);
+            var convertToJson = WriteTo(ReadJSONList);
+            return convertToJson;
+        }
+        public string WriteTo(List<T> turnToJson)
+        {
+            string convertToJson = JsonConvert.SerializeObject(turnToJson, Formatting.Indented);
             File.WriteAllText(JSONFilePath, convertToJson);
             return convertToJson;
         }
-        
         public List<T> ReadList()
         {
             var readlist = ReadFromList();
             return readlist;
         }
+        public List<T> DisplayEmployeesName()
+        {
+            var employeeList = ReadFromList();
+            for (int i = 0; i < employeeList.Count; i++)
+            {
+
+            }
+            return employeeList;
+        }
+        public string RemoveFromList(string removeEmployee)
+        {
+            List<T> allEmployees = ReadFromList();
+            if (allEmployees.Exists(e => e.Name.Equals(removeEmployee)))
+            {
+                var employeeWanted = allEmployees.Find(x => x.Name.Equals(removeEmployee));
+                allEmployees.Remove(employeeWanted);
+                WriteTo(allEmployees);
+                return removeEmployee;
+            }
+            return removeEmployee;
+        }
     }
 }
+

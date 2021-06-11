@@ -5,9 +5,11 @@ using System.Text;
 
 namespace Employees.Services
 {
-    public interface IEmployee<T>
+    public interface IEmployeeRepository<T>
     {
-        string WriteToFile(List<T> newList);
+        string WriteTo(List<T> formatData);
         List<T> ReadFromList();
+        string RemoveFromList(string removeEmployee);
+
     }
 }

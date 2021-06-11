@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Employees.Services
 {
-    class EmployeeLog
+    public interface ILogs
     {
-
-
+        void EmployeesCreatedLogs(string NewEmployeeLogged);
+        void CrashLogs();
     }
 }
