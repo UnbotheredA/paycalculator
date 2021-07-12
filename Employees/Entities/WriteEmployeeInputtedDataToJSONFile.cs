@@ -4,25 +4,29 @@ using System.Collections.Generic;
 
 namespace Employees.Entities
 {
-    public static class WriteEmployeeInputtedDataToJSONFile
+    public class WriteEmployeeInputtedDataToJSONFile
     {
-        public static EmployeeList<PermanentEmployee> employeeListPermanent = new EmployeeList<PermanentEmployee>();
-        public static EmployeeList<TempEmployee> employeeListTemp = new EmployeeList<TempEmployee>();
-
         public static string PermanentEmployeeAbsoulatePath;
         public static string TempEmployeeAbsoulatePath;
-        public static EmployeeJSONFormatter<PermanentEmployee> PermanentEmployeeJSONFormatter = new EmployeeJSONFormatter<PermanentEmployee>(PermanentEmployeeAbsoulatePath);
-        public static EmployeeJSONFormatter<TempEmployee> TempEmployeeJSONFormatter = new EmployeeJSONFormatter<TempEmployee>(TempEmployeeAbsoulatePath);
-
-        public static List<PermanentEmployee> AddPermanentEmployeeToJson(EmployeeJSONFormatter<PermanentEmployee> PermanentEmployeeJSON)
+        public EmployeeJSONFormatter<PermanentEmployee> PermanentEmployeeJSONFormatter = new EmployeeJSONFormatter<PermanentEmployee>(PermanentEmployeeAbsoulatePath);
+        public EmployeeJSONFormatter<TempEmployee> TempEmployeeJSONFormatter = new EmployeeJSONFormatter<TempEmployee>(TempEmployeeAbsoulatePath);
+        private NewEmployeeInput _newEmployeeInput;
+        public WriteEmployeeInputtedDataToJSONFile(NewEmployeeInput newEmployeeInput)
         {
-            var results = employeeListPermanent.AddToEmployee(employeeListPermanent.AddingNewPermanentEmployee, NewEmployeeInput.UserInputPermanentEmployee());
+            _newEmployeeInput = newEmployeeInput;
+        }
+        public List<PermanentEmployee> AddPermanentEmployeeToJson(EmployeeJSONFormatter<PermanentEmployee> PermanentEmployeeJSON)
+        {
+            EmployeeList<PermanentEmployee> _employeeListPermanent = new EmployeeList<PermanentEmployee>();
+            var results = _employeeListPermanent.AddToEmployee(_employeeListPermanent.AddingNewPermanentEmployee, _newEmployeeInput.UserInputPermanentEmployee());
             PermanentEmployeeJSON.AppenedToJsonFile(results);
             return results;
         }
-        public static List<TempEmployee> AddTempEmployeeToJson(EmployeeJSONFormatter<TempEmployee> TempEmployeeJSON)
+        public List<TempEmployee> AddTempEmployeeToJson(EmployeeJSONFormatter<TempEmployee> TempEmployeeJSON)
         {
-            var results = employeeListTemp.AddToEmployee(employeeListTemp.AddingNewTempEmployee, NewEmployeeInput.UserInputTempEmployee());
+
+            EmployeeList<TempEmployee> _employeeListTemp = new EmployeeList<TempEmployee>();
+            var results = _employeeListTemp.AddToEmployee(_employeeListTemp.AddingNewTempEmployee, _newEmployeeInput.UserInputTempEmployee());
             TempEmployeeJSON.AppenedToJsonFile(results);
             return results;
         }

@@ -3,17 +3,16 @@ using System;
 
 namespace Employees.Entities
 {
-    public static class NewEmployeeInput
+    public class NewEmployeeInput
     {
-        public static string NameInput;
-        private static decimal convertedSalary;
-        private static decimal convertedBonus;
-        private static int convertedholidayvalue;
-        private static decimal convertedDayRate;
-        private static int convertedWeeksWorked;
+        public string NameInput;
+        private decimal convertedSalary;
+        private decimal convertedBonus;
+        private int convertedholidayvalue;
+        private decimal convertedDayRate;
+        private int convertedWeeksWorked;
 
-
-        public static PermanentEmployee UserInputPermanentEmployee()
+        public PermanentEmployee UserInputPermanentEmployee()
         {
             Console.WriteLine("Write your name");
             NameInput = Console.ReadLine();
@@ -28,8 +27,8 @@ namespace Employees.Entities
             int.TryParse(holidayAllowanceInput, out convertedholidayvalue);
             return new PermanentEmployee(NameInput, convertedSalary, convertedBonus, convertedholidayvalue);
         }
-        
-        public static TempEmployee UserInputTempEmployee()
+
+        public TempEmployee UserInputTempEmployee()
         {
             Console.WriteLine("Write your name");
             NameInput = Console.ReadLine();
@@ -40,6 +39,6 @@ namespace Employees.Entities
             var weeksWorkedInput = Console.ReadLine();
             int.TryParse(weeksWorkedInput, out convertedWeeksWorked);
             return new TempEmployee(NameInput, convertedDayRate, convertedWeeksWorked);
-        }                  
+        }
     }
 }
