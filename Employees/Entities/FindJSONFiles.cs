@@ -1,24 +1,27 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Employees.Services;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Employees.Entities
 {
     public class FindJSONFiles
     {
-        public FindJSONFiles(string permanentEmployeeJSONFileLocation, string tempEmployeeJSONFileLocation)
+        private string dirForPermanentEmployeeJSONFile;
+        private string dirForTempJSONFile;
+        private IFileLocator _iFileLocator;
+        public FindJSONFiles(string permanentEmployeeJSONFileLocation, string tempEmployeeJSONFileLocation, IFileLocator iFileLocator)
         {
             dirForPermanentEmployeeJSONFile = permanentEmployeeJSONFileLocation;
             dirForTempJSONFile = tempEmployeeJSONFileLocation;
+            if (iFileLocator != null)
+            {
+                _iFileLocator = iFileLocator;
+            }
+            else 
+            {
+                throw new ArgumentNullException(nameof(iFileLocator));
+            }
         }
-         FileLocator FileLocator = new FileLocator();
-
-        private string dirForPermanentEmployeeJSONFile;
-        private string dirForTempJSONFile;
-       
-
-        public string PermanentEmployeeJSONLocation() =>  FileLocator.FindFile(dirForPermanentEmployeeJSONFile);
-        public string TempEmployeeJSONLocation() =>  FileLocator.FindFile(dirForTempJSONFile);
+        public string PermanentEmployeeJSONLocation() => _iFileLocator.FindFile(dirForPermanentEmployeeJSONFile);
+        public string TempEmployeeJSONLocation() => _iFileLocator.FindFile(dirForTempJSONFile);
     }
 }
