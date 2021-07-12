@@ -3,7 +3,6 @@ using Employees.Entities.JSON;
 using Microsoft.AspNetCore.Mvc;
 using NPOI.SS.Formula.Functions;
 using System.Collections.Generic;
-using System.Diagnostics;
 
 namespace PayCalculatorAPI.Controllers
 {
@@ -18,18 +17,17 @@ namespace PayCalculatorAPI.Controllers
             _permanentJSONFormatter = permanentJSONFormatter;
             _tempJSONFormatter = tempJSONFormatter;
         }
-        // fancy way is attrubite routing asp . net core attrubuite routing
         [HttpGet]
-        public ActionResult<List<T>> Get(EmployeeType employeeTypeEnum)
+        public ActionResult<List<T>> Get(EmployeeType employeeType)
         {
             var permanentEmployees = _permanentJSONFormatter.ReadFromList();
             var tempEmployees = _tempJSONFormatter.ReadFromList();
 
-            if (employeeTypeEnum == EmployeeType.Permanent)
+            if (employeeType == EmployeeType.Permanent)
             {
                 return Ok(permanentEmployees);
             }
-            else if (employeeTypeEnum == EmployeeType.Temp)
+            else if (employeeType == EmployeeType.Temp)
             {
                 return Ok(tempEmployees);
             }
@@ -62,11 +60,18 @@ namespace PayCalculatorAPI.Controllers
                 return Ok(viewModels);
             }
         }
+        [HttpDelete]
+        public IActionResult Delete(string removeEmployee)
+        {
+            bool findInputtedUser = _permanentJSONFormatter.RemoveEmployee(removeEmployee);
+            if (findInputtedUser)
+            {
+                return Ok("removed employee: " + findInputtedUser);
+            }
+            else
+            {
+                return BadRequest("could not find user");
+            }
+        }
     }
 }
-// it's fine as long as it says the truth
-// passing back a string  with string builder 
-// JSON Serialztion attributes on how it is serialized if this is empty ignore it.
-//elgnace solution something simple and neat and uses establish stuff
-//non nullble for value type
-// rendering something to null means reppear 

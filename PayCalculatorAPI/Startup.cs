@@ -1,12 +1,13 @@
+using Employees;
 using Employees.Entites;
 using Employees.Entities;
 using Employees.Entities.JSON;
+using Employees.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System.Text.Json;
 
 namespace PayCalculatorAPI
 {
@@ -23,12 +24,11 @@ namespace PayCalculatorAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            //I added this
             services.AddMvc();
             var pPath = Configuration["PermanentPath"];
             var tPath = Configuration["TempPath"];
-
-            var findJSONFiles = new FindJSONFiles(pPath, tPath);
+            IFileLocator iFileLocator = new FileLocator();
+            var findJSONFiles = new FindJSONFiles(pPath, tPath, iFileLocator);
             services.AddSingleton(new EmployeeJSONFormatter<PermanentEmployee>(findJSONFiles.PermanentEmployeeJSONLocation()));
             services.AddSingleton(new EmployeeJSONFormatter<TempEmployee>(findJSONFiles.TempEmployeeJSONLocation()));
         }
@@ -46,8 +46,6 @@ namespace PayCalculatorAPI
             app.UseRouting();
 
             app.UseAuthorization();
-           //I added this
-            app.UseDeveloperExceptionPage();
 
             app.UseEndpoints(endpoints =>
             {
