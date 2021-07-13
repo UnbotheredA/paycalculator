@@ -1,2 +1,0 @@
-2021-05-25 15:00:02.027 +01:00 [ERR]  This error: Employees.PayCalculator.Utilities.NegativeSalaryException: Annaul salary and bonus cannot be zero or less
-   at Employees.Entites.PermanentEmployee..ctor(String name, Decimal annualSalary, Decimal annualBonus, Int32 holidayAllowance) in C:\Users\osmana\source\repos\paycalculator\Employees\Entities\PermanentEmployee.cs:line 26, "2021-05-25T15:00:02.0166040+01:00"
