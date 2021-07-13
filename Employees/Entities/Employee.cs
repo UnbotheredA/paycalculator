@@ -14,10 +14,7 @@
         public abstract decimal HourlyPay();
         public override string ToString()
         {
-            return base.ToString() + $"{Name}, {EmployeeType}";
+            return $"{Name}, {EmployeeType}";
         }
-
     }
-
-
 }

@@ -1,7 +1,6 @@
 ﻿using Employees.PayCalculator.Utilities;
 using Employees.Services;
 using System;
-using System.Diagnostics;
 
 namespace Employees.Entites
 {
@@ -13,7 +12,7 @@ namespace Employees.Entites
 
         public PermanentEmployee(string name, decimal annualSalary, decimal annualBonus, int holidayAllowance) : base(name, EmployeeType.Permanent)
         {
-            if (annualSalary > 0 && annualBonus > 0)
+            if (annualSalary > 0)
             {
                 AnnualSalary = annualSalary;
                 AnnualBonus = annualBonus;
@@ -21,12 +20,13 @@ namespace Employees.Entites
             }
             else
             {
-                throw new NegativeSalaryException("Annaul salary and bonus cannot be zero or less");
+                throw new InvalidSalaryException("Annual salary cannot be zero or less");
             }
         }
+
         public override string ToString()
         {
-            return $"{AnnualSalary}, {AnnualBonus}, {HolidayAllowance},";
+            return $"{AnnualSalary}, {AnnualBonus}, {HolidayAllowance}";
         }
 
         public decimal CalculateAnnualBounsPay()
@@ -36,6 +36,7 @@ namespace Employees.Entites
             decimal totalIncome = annual + bonus;
             return totalIncome;
         }
+
         public override decimal HourlyPay()
         {
             decimal hoursInAYear = 35 * 52;
@@ -44,18 +45,16 @@ namespace Employees.Entites
             return formatHourSalary;
         }
 
-        public int AllowanceRemaning(int hoursOff)
+        public int HolidayAllowanceAvailable(int hoursOff)
         {
             if (hoursOff <= HolidayAllowance)
             {
-                Debug.WriteLine("Accepted");
                 HolidayAllowance = HolidayAllowance - hoursOff;
                 return HolidayAllowance;
             }
             else
             {
-                Debug.WriteLine("User is requesting more days off than possible");
-                throw new Exception("User is requesting more days off than possible");
+                throw new Exception("Requesting more holidays than possible.");
             }
         }
     }
