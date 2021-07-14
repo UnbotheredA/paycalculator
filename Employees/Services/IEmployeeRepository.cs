@@ -9,7 +9,7 @@ namespace Employees.Services
     {
         string WriteTo(List<T> formatData);
         List<T> ReadFromList();
-        string RemoveFromList(string removeEmployee);
+        bool RemoveEmployee(string removeEmployee);
 
     }
 }

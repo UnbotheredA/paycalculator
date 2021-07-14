@@ -10,7 +10,7 @@ namespace Employees.Entities.JSON
     public class EmployeeJSONFormatter<T> : IEmployeeRepository<T> where T : Employee
     {
 
-        public List<T> ReadJSONList = new List<T>();
+        private List<T> ReadJSONList = new List<T>();
         public string JSONFilePath;
 
         public EmployeeJSONFormatter(string fullPath)
@@ -32,27 +32,20 @@ namespace Employees.Entities.JSON
             var convertToJson = WriteTo(ReadJSONList);
             return convertToJson;
         }
+
         public string WriteTo(List<T> turnToJson)
         {
             string convertToJson = JsonConvert.SerializeObject(turnToJson, Formatting.Indented);
             File.WriteAllText(JSONFilePath, convertToJson);
             return convertToJson;
         }
-        public List<T> ReadList()
-        {
-            var readlist = ReadFromList();
-            return readlist;
-        }
-        public List<T> DisplayEmployeesName()
-        {
-            var employeeList = ReadFromList();
-            for (int i = 0; i < employeeList.Count; i++)
-            {
 
-            }
-            return employeeList;
+        public List<T> GetEmployeesName()
+        {
+            return ReadFromList();
         }
-        public string RemoveFromList(string removeEmployee)
+
+        public bool RemoveEmployee(string removeEmployee)
         {
             List<T> allEmployees = ReadFromList();
             if (allEmployees.Exists(e => e.Name.Equals(removeEmployee)))
@@ -60,9 +53,9 @@ namespace Employees.Entities.JSON
                 var employeeWanted = allEmployees.Find(x => x.Name.Equals(removeEmployee));
                 allEmployees.Remove(employeeWanted);
                 WriteTo(allEmployees);
-                return removeEmployee;
+                return true;
             }
-            return removeEmployee;
+            return false;
         }
     }
 }

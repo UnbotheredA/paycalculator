@@ -17,8 +17,9 @@ namespace Tests
         public void Annual_Salary_Is_Zero_Or_Less_Throw_Error()
         {
             //Arrange, Act and Assert 
-            Assert.Throws<NegativeSalaryException>(() => new PermanentEmployee("Test", 0m, 400, 5));
+            Assert.Throws<InvalidSalaryException>(() => new PermanentEmployee("Test", 0m, 400, 5));
         }
+
         [Test]
         public void Annual_Salary_Must_Be_Over_Zero()
         {
@@ -29,31 +30,34 @@ namespace Tests
             //Assert
             Assert.That(result, Is.GreaterThan(0));
         }
+
         [Test]
         public void Requested_More_Holiday_Than_Possible_Throws_Error()
         {
             //Arrange
-            int holidayrequest = 50;
+            int holidayRequest = 50;
             PermanentEmployee pe1 = new PermanentEmployee("Nancy", 4000, 400, 21);
 
             //Act and Assert
-            Assert.Throws<Exception>(() => pe1.AllowanceRemaning(holidayrequest));
+            Assert.Throws<Exception>(() => pe1.HolidayAllowanceAvailable(holidayRequest));
         }
+
         [Test]
         public void AllowanceRemaning_Is_Remaning_Holiday_Minus_Days_Requested()
         {
             //Arrange
-            var maxholidayamonut = 50;
-            var holidayrequest = 20;
-            PermanentEmployee pe2 = new PermanentEmployee("Aaron", 45000, 300, maxholidayamonut);
+            var maxHolidayAmonut = 50;
+            var holidayRequest = 20;
+            PermanentEmployee pe2 = new PermanentEmployee("Aaron", 45000, 300, maxHolidayAmonut);
             var expected = 30;
 
             //Act
-            var actual = pe2.AllowanceRemaning(holidayrequest);
+            var actual = pe2.HolidayAllowanceAvailable(holidayRequest);
 
             //Assert
             Assert.AreEqual(expected, actual);
         }
+
         [Test]
         public void CalculateAnnualBonus_Method_Returns_The_Expected_Calculation()
         {
@@ -69,7 +73,7 @@ namespace Tests
         }
 
         [Test]
-        public void HourlyPay_Method_Does_The_Correct_Calculation() //Improving method names to be more spesfic/descriptive
+        public void HourlyPay_Method_Does_The_Correct_Calculation() 
         {
             //Arrange
             PermanentEmployee permanentEmployee = new PermanentEmployee("Ruby", 40000, 700, 17);
