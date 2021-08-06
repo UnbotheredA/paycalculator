@@ -1,42 +1,61 @@
-﻿
-
+﻿using Employees.PayCalculator.Utilities;
 using Employees.Services;
+using System;
 
 namespace Employees.Entites
 {
-    public class PermanentEmployee : Employee,IHolidayCalculator
+    public class PermanentEmployee : Employee, IHolidayCalculator
     {
-        decimal annualSalary;
-        public decimal AnnualBonus;
-        public decimal AnnualSalary { get { return annualSalary; } }
-        public int HolidayAllowance; // is allowed to take off 
-      
+        public decimal AnnualSalary { get; set; }
+        public decimal AnnualBonus { get; set; }
+        public int HolidayAllowance { get; set; }
 
-        public PermanentEmployee( string name, decimal annualSalary, decimal annualBonus,int holidayAllowance) : base (name, EmployeeType.Permanent)
+        public PermanentEmployee(string name, decimal annualSalary, decimal annualBonus, int holidayAllowance) : base(name, EmployeeType.Permanent)
         {
-            this.annualSalary = annualSalary;
-            AnnualBonus = annualBonus;
-            HolidayAllowance = holidayAllowance;
+            if (annualSalary > 0)
+            {
+                AnnualSalary = annualSalary;
+                AnnualBonus = annualBonus;
+                HolidayAllowance = holidayAllowance;
+            }
+            else
+            {
+                throw new InvalidSalaryException("Annual salary cannot be zero or less");
+            }
         }
-        public decimal CalculateAnnualBounsPay() 
+
+        public override string ToString()
         {
-            decimal annual = annualSalary;
+            return $"{AnnualSalary}, {AnnualBonus}, {HolidayAllowance}";
+        }
+
+        public decimal CalculateAnnualBounsPay()
+        {
+            decimal annual = AnnualSalary;
             decimal bonus = AnnualBonus;
-            decimal total = annual + bonus;
-            return total;
+            decimal totalIncome = annual + bonus;
+            return totalIncome;
         }
+
         public override decimal HourlyPay()
         {
             decimal hoursInAYear = 35 * 52;
-            decimal hourSalary = annualSalary / hoursInAYear;
-            //decimal formatHourSalary = decimal.ToInt32(hourSalary);
-            return hourSalary;
+            decimal hourSalary = AnnualSalary / hoursInAYear;
+            decimal formatHourSalary = decimal.ToInt32(hourSalary);
+            return formatHourSalary;
         }
 
-        public int AllowanceRemaning(int hoursOff)
+        public int HolidayAllowanceAvailable(int hoursOff)
         {
-            HolidayAllowance = HolidayAllowance - hoursOff;
-            return HolidayAllowance;
+            if (hoursOff <= HolidayAllowance)
+            {
+                HolidayAllowance = HolidayAllowance - hoursOff;
+                return HolidayAllowance;
+            }
+            else
+            {
+                throw new Exception("Requesting more holidays than possible.");
+            }
         }
     }
 }

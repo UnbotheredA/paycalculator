@@ -1,0 +1,42 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    @model List<ViewModel>
+}
+<div class="text-center">
+    <h1 class="display-4">Employees</h1>
+    <table class="table table-sm table-striped table-bordered m-2">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Annual Salary</th>
+                <th>Bonus</th>
+                <th>Holiday</th>
+                <th>Weeks Worked</th>
+                <th>Day Rate</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var r in Model)
+            {
+            <tr>
+                <td>@r.EmployeeName</td>
+                <td>@r.EmployeeType</td>
+                <td>@r.AnnualSalary</td>
+                <td>@r.AnnualBonus</td>
+                <td>@r.Holiday</td>
+                <td>@r.DayRate</td>
+                <td>@r.WeeksWorked</td>
+                <td><a href="http://localhost:55177/Home/Edit"> Edit </a> </td>
+                <td><a href="http://localhost:55177/Home/Delete?remove=@+Employee.Name"> Delete Employee </a> </td>
+                <td><a href="https://localhost:44301/Home/Delete?remove=Employee.Name"> Delete Employee with port </a> </td>
+                <a href="Home/Delete">
+                    <input type="button" value="Click Me" />
+                </a>
+            </tr>
+            }
+        </tbody>
+    </table>
+
+    <a href="https://localhost:44301/Home/Delete"> Enter name of employee you want to  delete </a>
+</div>

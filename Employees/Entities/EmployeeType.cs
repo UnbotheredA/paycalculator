@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Employees.Entites
+﻿namespace Employees.Entites
 {
-   public enum EmployeeType
+    public enum EmployeeType
     {
-        contract,
-        temp,
-        Permanent,   
+        Contract,
+        Temp,
+        Permanent,
     }
 }

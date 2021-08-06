@@ -1,0 +1,63 @@
+﻿@model PayCalculatorWebApplication.Models.ViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>ViewModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="EmployeeName" class="control-label"></label>
+                <input asp-for="EmployeeName" class="form-control" />
+                <span asp-validation-for="EmployeeName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EmployeeType" class="control-label"></label>
+                <input asp-for="EmployeeType" class="form-control" />
+                <span asp-validation-for="EmployeeType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AnnualSalary" class="control-label"></label>
+                <input asp-for="AnnualSalary" class="form-control" />
+                <span asp-validation-for="AnnualSalary" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AnnualBonus" class="control-label"></label>
+                <input asp-for="AnnualBonus" class="form-control" />
+                <span asp-validation-for="AnnualBonus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Holiday" class="control-label"></label>
+                <input asp-for="Holiday" class="form-control" />
+                <span asp-validation-for="Holiday" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DayRate" class="control-label"></label>
+                <input asp-for="DayRate" class="form-control" />
+                <span asp-validation-for="DayRate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WeeksWorked" class="control-label"></label>
+                <input asp-for="WeeksWorked" class="form-control" />
+                <span asp-validation-for="WeeksWorked" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

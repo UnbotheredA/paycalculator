@@ -5,11 +5,13 @@ VisualStudioVersion = 16.0.30611.23
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "paycalculator", "paycalculator\paycalculator.csproj", "{88DDCA97-307F-4ED8-8D59-0A07CDDB413B}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PayCalculatorTest", "PayCalculatorTest", "{D41899D8-AE49-489B-BBE8-C0D3B7691E88}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Employees", "Employees\Employees.csproj", "{4BE7FB91-3A17-4464-985B-67775B2BA22B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NUnitTestProject1", "NUnitTestProject1\NUnitTestProject1.csproj", "{1B547E12-B3A2-420B-ADC0-8E54CC82C49E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeTests", "EmployeeTests\EmployeeTests.csproj", "{87EAF3D8-0F26-473F-BAC7-EDA81FA9589B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Employees", "Employees\Employees.csproj", "{4BE7FB91-3A17-4464-985B-67775B2BA22B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayCalculatorAPI", "PayCalculatorAPI\PayCalculatorAPI.csproj", "{05264180-95F4-4727-8B09-5CEF94A2B7DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayCalculatorWebApplication", "PayCalculatorWebApplication\PayCalculatorWebApplication.csproj", "{6BC05E8B-3418-430F-BB08-78678645D4E5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,20 +23,25 @@ Global
 		{88DDCA97-307F-4ED8-8D59-0A07CDDB413B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{88DDCA97-307F-4ED8-8D59-0A07CDDB413B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{88DDCA97-307F-4ED8-8D59-0A07CDDB413B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1B547E12-B3A2-420B-ADC0-8E54CC82C49E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1B547E12-B3A2-420B-ADC0-8E54CC82C49E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1B547E12-B3A2-420B-ADC0-8E54CC82C49E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1B547E12-B3A2-420B-ADC0-8E54CC82C49E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4BE7FB91-3A17-4464-985B-67775B2BA22B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4BE7FB91-3A17-4464-985B-67775B2BA22B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4BE7FB91-3A17-4464-985B-67775B2BA22B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4BE7FB91-3A17-4464-985B-67775B2BA22B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87EAF3D8-0F26-473F-BAC7-EDA81FA9589B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87EAF3D8-0F26-473F-BAC7-EDA81FA9589B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87EAF3D8-0F26-473F-BAC7-EDA81FA9589B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87EAF3D8-0F26-473F-BAC7-EDA81FA9589B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05264180-95F4-4727-8B09-5CEF94A2B7DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05264180-95F4-4727-8B09-5CEF94A2B7DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05264180-95F4-4727-8B09-5CEF94A2B7DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05264180-95F4-4727-8B09-5CEF94A2B7DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6BC05E8B-3418-430F-BB08-78678645D4E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BC05E8B-3418-430F-BB08-78678645D4E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6BC05E8B-3418-430F-BB08-78678645D4E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6BC05E8B-3418-430F-BB08-78678645D4E5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{1B547E12-B3A2-420B-ADC0-8E54CC82C49E} = {D41899D8-AE49-489B-BBE8-C0D3B7691E88}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AC2DF282-CEF1-4775-84FB-5FAB2BC23EE7}

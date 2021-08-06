@@ -1,47 +1,141 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using Employees;
 using Employees.Entites;
+using Employees.Entities;
+using Employees.Entities.JSON;
 using Employees.Services;
+using Microsoft.Extensions.Configuration;
+using System;
+using System.Collections.Generic;
 
 namespace paycalculator
 {
     class Program
     {
-        
+        private static NewEmployeeInput _newEmployeeInput = new NewEmployeeInput();
+        private static ILog iLogs;
+        private static List<ILog> _Logs = new List<ILog>();
 
-        public static void Main(string[] args)
+        static void Main(string[] args)
         {
-
-
-            PermanentEmployee p1 = new PermanentEmployee(name: "Joe Bloggs", 40000, 5000, holidayAllowance: 21);
-            string jsonString = JsonConvert.SerializeObject(p1);
-            Console.WriteLine(jsonString);
-
-            PermanentEmployee p2 = new PermanentEmployee(name:"John Smith", 45000, 2500,21);
-            Console.WriteLine(p1.AllowanceRemaning(4));
-            Console.WriteLine($"The total of money made with bouns is £{p1.CalculateAnnualBounsPay()}");
-            Console.WriteLine($"Hourly pay for a permanet employee is £{p1.HourlyPay()}");
-            TempEmployee t1 = new TempEmployee(name:"Clares Jones", annualsalary:0, annualBonus:0, dayRate:350,weeksWorked: 40);
-            Console.WriteLine($"The money made in total is £{t1.MoneyMadeInTotal()}");
-            Console.WriteLine($"The hourly pay for temp is £{t1.HourlyPay()}");
-            DisplayContent(p1,p2,t1);
-         }
-
-        public static void DisplayContent(PermanentEmployee p1, PermanentEmployee p2, TempEmployee t1)
-        {
-            Console.WriteLine("   Name " + "   Type Of Employee " + "  Annaul Salary "  +   "          Bouns       " +        "          Day Rate      " + " " + " Weeks Worked ");
-                        
-            Console.WriteLine("__________|______________|_________________________|___________________|_______________|______________|");
-            Console.WriteLine("|         |              |                         |                   |               |              |");
-            Console.WriteLine($"{p1.Name}    {p1.EmployeeType}              {p1.AnnualSalary}                   {p1.AnnualBonus}          N/A             N/A");
-            Console.WriteLine("__________|______________|_________________________|___________________|_______________|______________|");
-            Console.WriteLine("|         |              |                         |                   |               |              |");
-            Console.WriteLine($"{p2.Name}    {p2.EmployeeType}              {p2.AnnualSalary}                   {p2.AnnualBonus}          N/A             N/A");
-            Console.WriteLine("__________|______________|_________________________|___________________|_______________|______________|");
-            Console.WriteLine("|         |              |                         |                   |               |              |");
-            Console.WriteLine($"{t1.Name}    {t1.EmployeeType}            N/A                  N/A                       {t1.DayRate}                 {t1.WeeksWorked}      ");
-            Console.WriteLine("__________|______________|_________________________|___________________|_______________|______________|");
-
+            DisplayEmployees displayEmployees = new DisplayEmployees();
+            displayEmployees.DisplayContent(displayEmployees.permanentEmployee1, displayEmployees.PermanentEmployee2, displayEmployees.TempEmployee1);
+            FindLogFiles findLogs = new FindLogFiles();
+            iLogs = new EmployeeCreatedLog(findLogs.EmployeeCreatedLogsEndPath);
+            _Logs.Add(iLogs);
+            iLogs = new CrashLog(findLogs.CrashCreatedLogsEndPath);
+            _Logs.Add(iLogs);
+            EmployeeAction();
         }
-     }
+
+        private static void EmployeeAction()
+        {
+            Console.WriteLine("Type p1 to add  permanent employee, rp2 to read permanent employee and type rp to remove permanent employee. Type t1 to add temp employee, rt2 to read all temp employees and type rt to remove temp employee. Type done to exit application");
+            bool isDone = false;
+            IConfiguration config = new ConfigurationBuilder().AddJsonFile(@"appsettings.json", false, true).Build();
+            IFileLocator ifileLocator = new FileLocator();
+            FindJSONFiles findJSONFile = new FindJSONFiles(config["PermanentPath"], config["TempPath"], ifileLocator);
+            WriteEmployeeInputtedDataToJSONFile writeEmployeeInputtedDataToJSON = new WriteEmployeeInputtedDataToJSONFile(_newEmployeeInput);
+            writeEmployeeInputtedDataToJSON.PermanentEmployeeJSONFormatter.JSONFilePath = findJSONFile.PermanentEmployeeJSONLocation();
+            writeEmployeeInputtedDataToJSON.TempEmployeeJSONFormatter.JSONFilePath = findJSONFile.TempEmployeeJSONLocation();
+            while (!isDone)
+            {
+                string action = Console.ReadLine();
+                switch (action)
+                {
+                    case "p1":
+                        try
+                        {
+                            writeEmployeeInputtedDataToJSON.AddPermanentEmployeeToJson(writeEmployeeInputtedDataToJSON.PermanentEmployeeJSONFormatter);
+                            Console.WriteLine("New employee added " + _newEmployeeInput.NameInput);
+                            Log(LogType.EmployeeCreated, $" Permanent employee created {_newEmployeeInput.NameInput} ");
+                            Console.WriteLine("Type p1 to add  permanent employee, rp2 to read permanent employee and type rp to remove permanent employee. Type t1 to add temp employee, rt2 to read all temp employees and type rt to remove temp employee. Type done to exit application");
+                        }
+                        catch (Exception ex)
+                        {
+                            Log(LogType.Crash, $" {AppDomain.CurrentDomain.FriendlyName}, the error is: {ex.Message}");
+                            Console.WriteLine("Type p1 to add  permanent employee, rp2 to read permanent employee and type rp to remove permanent employee. Type t1 to add temp employee, rt2 to read all temp employees and type rt to remove temp employee. Type done to exit application");
+                        }
+                        break;
+                    case "rp2":
+                        EmployeeList<PermanentEmployee> employeeListPermanent = new EmployeeList<PermanentEmployee>();
+                        var list = employeeListPermanent.ReadEmployeeList(writeEmployeeInputtedDataToJSON.PermanentEmployeeJSONFormatter.GetEmployeesName());
+                        foreach (var emp in list)
+                        {
+                            Console.WriteLine("permanent employees name: " + emp.Name);
+
+                        }
+                        Console.WriteLine("Type p1 to add  permanent employee, rp2 to read permanent employee and type rp to remove permanent employee. Type t1 to add temp employee,  rt2 to read all temp employees and type rt to remove temp employee. Type done to exit application");
+                        break;
+                    case "rp":
+                        EmployeeJSONFormatter<PermanentEmployee> permanentJsonFormatter = new EmployeeJSONFormatter<PermanentEmployee>(findJSONFile.PermanentEmployeeJSONLocation());
+                        Console.WriteLine("Enter name of employee to remove: \n");
+                        foreach (var employeeName in permanentJsonFormatter.GetEmployeesName())
+                        {
+                            Console.WriteLine(employeeName.Name);
+                        }
+                        string removePermanentEmployee = Console.ReadLine();
+                        Console.WriteLine(permanentJsonFormatter.RemoveEmployee(removePermanentEmployee) + "\n");
+                        Console.WriteLine($"Employee removed {removePermanentEmployee}");
+                        Console.WriteLine("Type p1 to add  permanent employee, rp2 to read permanent employee and type rp to remove permanent employee. Type t1 to add temp employee, rt2 to read all temp employees and type rt to remove temp employee. Type done to exit application");
+                        break;
+                    case "t1":
+                        try
+                        {
+                            writeEmployeeInputtedDataToJSON.AddTempEmployeeToJson(writeEmployeeInputtedDataToJSON.TempEmployeeJSONFormatter);
+                            Console.WriteLine("New employee added " + _newEmployeeInput.NameInput);
+                            Log(LogType.EmployeeCreated, $" Temp employee created {_newEmployeeInput.NameInput} ");
+                            Console.WriteLine("Type p1 to add  permanent employee, rp2 to read permanent employee and type rp to remove permanent employee. Type t1 to add temp employee, rt2 to read all temp employees and type rt to remove temp employee. Type done to exit application");
+                        }
+                        catch(Exception ex)
+                        {
+                            Log(LogType.Crash, $" {AppDomain.CurrentDomain.FriendlyName}, the error is: {ex.Message}");
+                            Console.WriteLine("Type p1 to add  permanent employee, rp2 to read permanent employee and type rp to remove permanent employee. Type t1 to add temp employee, rt2 to read all temp employees and type rt to remove temp employee. Type done to exit application");
+                        }
+                        break;
+                    case "rt2":
+                        EmployeeList<TempEmployee> employeeListTemp = new EmployeeList<TempEmployee>();
+                        var allTempEmployees = employeeListTemp.ReadEmployeeList(writeEmployeeInputtedDataToJSON.TempEmployeeJSONFormatter.GetEmployeesName());
+                        foreach (var employeeName in allTempEmployees)
+                        {
+                            Console.WriteLine("temp employees: " + employeeName.Name);
+                        }
+                        Console.WriteLine("Type p1 to add  permanent employee, rp2 to read permanent employee and type rp to remove permanent employee. Type t1 to add temp employee, rt2 to read all temp employees and type rt to remove temp employee. Type done to exit application");
+                        break;
+                    case "rt":
+                        EmployeeJSONFormatter<TempEmployee> tempJsonFormatter = new EmployeeJSONFormatter<TempEmployee>(findJSONFile.TempEmployeeJSONLocation());
+                        Console.WriteLine("Enter name of employee to remove: \n");
+                        foreach (var employeeNames in tempJsonFormatter.GetEmployeesName())
+                        {
+                            Console.WriteLine(employeeNames.Name);
+                        }
+                        string removeTempEmployee = Console.ReadLine();
+                        Console.WriteLine(tempJsonFormatter.RemoveEmployee(removeTempEmployee) + "\n");
+                        Console.WriteLine($"Employee removed {removeTempEmployee}");
+                        Console.WriteLine("Type p1 to add  permanent employee, rp2 to read permanent employee and type rp to remove permanent employee. Type t1 to add temp employee, rt2 to read all temp employees and type rt to remove temp employee. Type done to exit application");
+                        break;
+                    case "done":
+                        isDone = true;
+                        break;
+                    default:
+                        Console.WriteLine("something wrong");
+                        isDone = true;
+                        break;
+                }
+            }
+        }
+
+        public static void Log(LogType loggerType, string message)
+        {
+            foreach (ILog iLog in _Logs)
+            {
+                if (iLog.CanLog(loggerType))
+                {
+                    iLog.Log(message);
+                }
+            }
+        }
+    }
 }
+
+
+

@@ -6,7 +6,6 @@ namespace Employees.Services
 {
     interface IHolidayCalculator
     {
-        int AllowanceRemaning(int hourOff); 
+        int HolidayAllowanceAvailable(int hourOff);
     }
 }
-// services are classess that only have functionality and does a lot of calculation
