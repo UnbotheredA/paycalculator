@@ -12,11 +12,13 @@ namespace PayCalculatorAPI.Controllers
     {
         private readonly EmployeeJSONFormatter<PermanentEmployee> _permanentJSONFormatter;
         private readonly EmployeeJSONFormatter<TempEmployee> _tempJSONFormatter;
+        List<Employee> employees = new List<Employee>();
         public EmployeeController(EmployeeJSONFormatter<PermanentEmployee> permanentJSONFormatter, EmployeeJSONFormatter<TempEmployee> tempJSONFormatter)
         {
             _permanentJSONFormatter = permanentJSONFormatter;
             _tempJSONFormatter = tempJSONFormatter;
         }
+
         [HttpGet]
         public ActionResult<List<T>> Get(EmployeeType employeeType)
         {
@@ -60,6 +62,7 @@ namespace PayCalculatorAPI.Controllers
                 return Ok(viewModels);
             }
         }
+
         [HttpDelete]
         public IActionResult Delete(string removeEmployee)
         {
@@ -72,6 +75,29 @@ namespace PayCalculatorAPI.Controllers
             {
                 return BadRequest("could not find user");
             }
+        }
+
+        [HttpPut]
+        public IActionResult Put(ViewModel editEmployee, string editEmployeeInfo)
+        {
+            var allEmployees = _permanentJSONFormatter.ReadFromList();
+            if (allEmployees.Exists(e => e.Name.Equals(editEmployeeInfo)))
+            {
+                var findEmployee = allEmployees.Find(x => x.Name.Equals(editEmployeeInfo));
+                if (findEmployee != null)
+                {
+                    findEmployee.Name = editEmployee.EmployeeName;
+                    findEmployee.AnnualSalary = (decimal)editEmployee.AnnualSalary;
+                    findEmployee.AnnualBonus = (decimal)editEmployee.AnnualBonus;
+                    findEmployee.EmployeeType = editEmployee.EmployeeType;
+                    findEmployee.HolidayAllowance = (int)editEmployee.Holiday;
+                }
+                else 
+                {
+                    return NotFound();
+                }
+            }
+            return Ok();
         }
     }
 }
